@@ -76,7 +76,7 @@ $pdata = mysqli_fetch_array($pq);
     <div class="row gx-5">
       <aside class="col-lg-6">
         <div class=" justify-content-center">
-            <img width="400px" src="upload/<?php echo $pdata['prod_photo'];?>" />
+            <img width="400px" src="admin/uploads/<?php echo $pdata['prod_photo'];?>" />
         
         </div>
 
@@ -189,7 +189,7 @@ $pdata = mysqli_fetch_array($pq);
                             <div class="product__item">
                                 <div class="product__item__pic" >
                                 <a href="shop-details.php?product_id=<?php echo $data['prod_id'];?>  ">
-                                        <img   width="250px" src="upload/<?php echo $data['prod_photo']?>" >
+                                        <img   width="250px" src="admin/uploads/<?php echo $data['prod_photo']?>" >
                                     </a>
                                 </div>
                                 <div class="product__item__text">

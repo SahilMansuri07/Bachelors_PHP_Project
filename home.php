@@ -124,7 +124,7 @@ session_start();
                             <div class="product__item">
                                 <div class="product__item__pic" >
                                 <a href="shop-details.php?product_id=<?php echo $data['prod_id'];?>  ">
-                                        <img   width="230px" src="upload/<?php echo $data['prod_photo']?>" >
+                                        <img   width="230px" src="admin/uploads/<?php echo $data['prod_photo']?>" >
                                     </a>
                                 </div>
                                 <div class="product__item__text">

@@ -130,7 +130,7 @@ include  './themepart/header.php';
                                     </td>
                                     <td class="product__cart__item">
                                         <div class="product__cart__item__pic">
-                                         <img src="upload/<?php echo $pdata['prod_photo']?>" width="100" alt="">
+                                         <img src="admin/uploads/<?php echo $pdata['prod_photo']?>" width="100" alt="">
                                         </div>
                                     </td>
                                    

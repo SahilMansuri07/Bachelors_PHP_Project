@@ -1,6 +1,6 @@
 <?php
- require './atclass/connection.php'; 
- session_start();
+require './atclass/connection.php';
+session_start();
 ?>
 
 
@@ -17,7 +17,7 @@
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
-    rel="stylesheet">
+        rel="stylesheet">
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
@@ -32,7 +32,7 @@
 
 <body>
     <!-- Page Preloder -->
-    
+
 
     <!-- Offcanvas Menu Begin -->
 
@@ -41,7 +41,7 @@
     <!-- Header Section Begin -->
     <?php
     include "./themepart/header.php";
-?>
+    ?>
     <!-- Header Section End -->
 
     <!-- Breadcrumb Section Begin -->
@@ -69,7 +69,7 @@
                 <div class="col-lg-3">
                     <div class="shop__sidebar">
                         <div class="shop__sidebar__search">
-                            <form  >
+                            <form>
                                 <input type="text" name='q' placeholder="Search...">
                                 <button type="submit"><span class="icon_search"></span></button>
                             </form>
@@ -85,14 +85,14 @@
                                             <div class="shop__sidebar__categories">
                                                 <ul class="nice-scroll">
                                                     <?php
-$cq = mysqli_query ($connection , "select * from tbl_category ");
-while($cdata = mysqli_fetch_array($cq)){
+                                                    $cq = mysqli_query($connection, "select * from tbl_category ");
+                                                    while ($cdata = mysqli_fetch_array($cq)) {
 
-    echo "<li><a href='shop.php?categoryid={$cdata['category_id']}'> {$cdata['category_name']} </li>";
+                                                        echo "<li><a href='shop.php?categoryid={$cdata['category_id']}'> {$cdata['category_name']} </li>";
 
-}
-?>
-                                                   
+                                                    }
+                                                    ?>
+
 
                                                 </ul>
                                             </div>
@@ -108,12 +108,11 @@ while($cdata = mysqli_fetch_array($cq)){
                                             <div class="shop__sidebar__brand">
                                                 <ul>
                                                     <?php
-                                                $coq = mysqli_query ($connection , "select * from tbl_company limit 5");
-                                                while($codata = mysqli_fetch_array($coq))
-                                                {
-                                                echo" <li> <a href='shop.php?company_id={$codata['company_id']}'> {$codata['company_name']}  </li>";
-                                                }
-                                                    ?>        
+                                                    $coq = mysqli_query($connection, "select * from tbl_company limit 5");
+                                                    while ($codata = mysqli_fetch_array($coq)) {
+                                                        echo " <li> <a href='shop.php?company_id={$codata['company_id']}'> {$codata['company_name']}  </li>";
+                                                    }
+                                                    ?>
                                                 </ul>
                                             </div>
                                         </div>
@@ -129,60 +128,121 @@ while($cdata = mysqli_fetch_array($cq)){
                     <br>
                     <div class="row">
                         <?php
-// company id operation 
- if(isset($_GET['company_id'])){
-    $coid= $_GET['company_id'];
-    $q = mysqli_query($connection,"select * from tbl_product where company_id= '{$coid}'");
+                        // company id operation 
+                        if (isset($_GET['company_id'])) {
+                            $coid = $_GET['company_id'];
+                            $q = mysqli_query($connection, "select * from tbl_product where company_id= '{$coid}'");
 
- }
- 
-                
-                        //category id opration
-                      else  if(isset($_GET['categoryid'])){
-                            $cid= $_GET['categoryid'];
-                            $q = mysqli_query($connection,"select * from tbl_product where category_id= '{$cid}'");
                         }
+
+
+                        //category id opration
+                        else if (isset($_GET['categoryid'])) {
+                            $cid = $_GET['categoryid'];
+                            $q = mysqli_query($connection, "select * from tbl_product where category_id= '{$cid}'");
+                        } else if (isset($_GET['q'])) {
+                            $q = $_GET['q'];
+                            $q = mysqli_query($connection, "select * from tbl_product where prod_name like '%{$q}%'");
+                        } else {
+                            $limit = 9; // products per page
+                            $page = isset($_GET['page']) ? $_GET['page'] : 1;
+                            $start_from = ($page - 1) * $limit;
+
+                            $condition = ""; // for filters
                         
-                        else if(isset($_GET['q'])){
-                            $q= $_GET['q'];
-                            $q = mysqli_query($connection,"select * from tbl_product where prod_name like '%{$q}%'");
-                        }else{
+                            // Handle company filter
+                            if (isset($_GET['company_id'])) {
+                                $coid = $_GET['company_id'];
+                                $condition = "where company_id = '{$coid}'";
+                            }
 
-        $q = mysqli_query($connection,"select * from tbl_product");
-    }
-   
-        while($data = mysqli_fetch_array($q))
-        {
+                            // Handle category filter
+                            else if (isset($_GET['categoryid'])) {
+                                $cid = $_GET['categoryid'];
+                                $condition = "where category_id = '{$cid}'";
+                            }
 
-                        ?>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic" >
-                                <a href="shop-details.php?product_id=<?php echo $data['prod_id'];?>  ">
-                                        <img   width="230px" src="upload/<?php echo $data['prod_photo']?>" >
-                                    </a>
-                                </div>
-                                <div class="product__item__text">
-                                <a href="shop-details.php?product_id=<?php echo $data['prod_id'];?>  ">
-                                <h6><?php echo $data['prod_name'];?></h6></a>
-                                   
+                            // Handle search
+                            else if (isset($_GET['q'])) {
+                                $q = $_GET['q'];
+                                $condition = "where prod_name like '%{$q}%'";
+                            }
 
-                                    <h5>₹<?php echo $data['prod_price'];?></h5>
-                                    
-                                    <div class="product__color__select" >
-                                        <form method="post" class='btn btn-light'>
-                                            <a href="shop-details.php?product_id=<?php echo $data['prod_id'];?>  ">details</a>
-                                        </form>
-                                        <!-- <input type="button" value="Add To Cart"  class="btn btn-outline-primary"> -->
-                                        
+                            $product_query = "select * from tbl_product $condition limit $start_from, $limit";
+                            $q = mysqli_query($connection, $product_query);
+
+                            // For pagination count
+                            $count_result = mysqli_query($connection, "select count(*) as total from tbl_product $condition");
+                            $count_row = mysqli_fetch_assoc($count_result);
+                            $total_records = $count_row['total'];
+                            $total_pages = ceil($total_records / $limit);
+
+                        }
+
+                        while ($data = mysqli_fetch_array($q)) {
+
+                            ?>
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic">
+                                        <a href="shop-details.php?product_id=<?php echo $data['prod_id']; ?>  ">
+                                            <img width="230px" src="admin/uploads/<?php echo $data['prod_photo'] ?>">
+                                        </a>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <a href="shop-details.php?product_id=<?php echo $data['prod_id']; ?>  ">
+                                            <h6><?php echo $data['prod_name']; ?></h6>
+                                        </a>
+
+
+                                        <h5>₹<?php echo $data['prod_price']; ?></h5>
+
+                                        <div class="product__color__select">
+                                            <form method="post" class='btn btn-light'>
+                                                <a
+                                                    href="shop-details.php?product_id=<?php echo $data['prod_id']; ?>  ">details</a>
+                                            </form>
+                                            <!-- <input type="button" value="Add To Cart"  class="btn btn-outline-primary"> -->
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <?php
+
+                        }
+                        ?>
+                        <div class="col-lg-12 text-center" style="
+                                                .pagination__option a {
+                            display: inline-block;
+                            margin: 5px;
+                            padding: 10px 15px;
+                            background: #f3f3f3;
+                            color: #333;
+                            border-radius: 4px;
+                            text-decoration: none;
+                        }
+
+                        .pagination__option a:hover {
+                            background: #000;
+                            color: #fff;
+                        }
+
+                                                ">
+                            <div class="pagination__option">
+                                <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                                    <a href="shop.php?page=<?php echo $i; ?><?php
+                                       if (isset($_GET['categoryid']))
+                                           echo '&categoryid=' . $_GET['categoryid'];
+                                       if (isset($_GET['company_id']))
+                                           echo '&company_id=' . $_GET['company_id'];
+                                       if (isset($_GET['q']))
+                                           echo '&q=' . $_GET['q'];
+                                       ?>"><?php echo $i; ?></a>
+                                <?php endfor; ?>
+                            </div>
                         </div>
-        <?php
-        }
-        ?>
-                    </div>     
+                    </div>
                 </div>
             </div>
         </div>
@@ -191,7 +251,7 @@ while($cdata = mysqli_fetch_array($cq)){
 
     <!-- Footer Section Begin -->
     <?php
-        include "./themepart/footer.php";
+    include "./themepart/footer.php";
     ?>
     <!-- Footer Section End -->
 
@@ -200,8 +260,8 @@ while($cdata = mysqli_fetch_array($cq)){
         <div class="h-100 d-flex align-items-center justify-content-center">
             <div class="search-close-switch">+</div>
             <form class="search-model-form">
-             
-            <input type="text" name='q' placeholder="Search...">
+
+                <input type="text" name='q' placeholder="Search...">
             </form>
         </div>
     </div>
