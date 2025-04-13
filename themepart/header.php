@@ -8,7 +8,7 @@ require './atclass/connection.php';
             <div class="row">
                 <div class="col-lg-6 col-md-7">
                     <div class="header__top__left">
-                        <p>Free shipping, On All Order Up to ₹500.</a></p>
+                        <p>Free shipping, On All Order Up to ₹5000.</a></p>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-5">
@@ -38,7 +38,7 @@ require './atclass/connection.php';
                 <div class="col-lg-4 col-md-4">
                     <div class="header__logo">
                         <a href="home.php">
-                            <img src="img/logo2.jpg" alt=""></a>
+                            <img src="img/FurniVibe.jpg" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6" style="display: contents;">
