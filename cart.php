@@ -267,9 +267,8 @@ $i = 0;
                     qty: qty
                 },
                 success: function (response) {
-                    // Optionally update grand total
-                    location.reload(); // You can remove this and calculate totals via JS too
-                }
+    window.location.href = "cart.php";
+}
             });
         });
     });
