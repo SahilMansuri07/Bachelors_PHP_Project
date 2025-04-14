@@ -21,7 +21,7 @@ if($_POST)
 	$company_id=mysqli_real_escape_string($connection , $_POST ['company1']);
 	
 	
-$query=mysqli_query($connection,"update tbl_product set  prod_name='{$name}', prod_price='{$price}', prod_detail='{$detail}',prod_stock='{$stock}' , category_id ='{$category_id}' , company_id='{$company_id}' where prod_id='{$id}'") or die(mysqli_error($connection));
+$query=mysqli_query($connection,"update tbl_product set  prod_name='{$name}', prod_price='{$price}', prod_photo='{$photo}', prod_detail='{$detail}',prod_stock='{$stock}' , category_id ='{$category_id}' , company_id='{$company_id}' where prod_id='{$id}'") or die(mysqli_error($connection));
 
 if($query)
 {

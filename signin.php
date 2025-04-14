@@ -13,8 +13,16 @@ if($_POST){
   
   $q = mysqli_query ($connection , "insert into tbl_user(user_name,user_email,user_password,user_mobile,user_address) Values ('{$name}','{$email}','{$password}','{$mobile}','{$address}')") or die (mysqli_error($_connection));
     //fetch old password form db
+<<<<<<< HEAD
      
         echo("<script>alert('New and Confirm Password Not Match');</script>");
+=======
+    if($q){
+      header("location:login.php");
+    }else{
+    echo("<script>alert('New and Confirm Password Not Match');</script>");
+    }
+>>>>>>> new-branch-name
    
 } 
  

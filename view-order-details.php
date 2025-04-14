@@ -117,7 +117,7 @@ include  './themepart/header.php';
                 echo '<tr>';
                 echo "<td>{$orderrow['order_id']}</td>";
                 echo "<td>{$pdata['prod_name']}</td>";
-                echo "<td><img src='./upload/{$pdata['prod_photo']}' width='100'/></td>";
+                echo "<td><img src='./admin/uploads/{$pdata['prod_photo']}' width='100'/></td>";
                 echo "<td>{$orderrow['prod_qty']}</td>";
                 echo "<td>{$orderrow['prod_price']}</td>";
                 
