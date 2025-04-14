@@ -31,11 +31,11 @@ $i = 0;
 
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Male_Fashion Template">
+    <meta name="description" content="FurniVibe | Shape Your Spacee">
     <meta name="keywords" content="Male_Fashion, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Male-Fashion | Template</title>
+    <title>FurniVibe | Shape Your Space</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
@@ -122,7 +122,8 @@ $i = 0;
                                             <td class="product__cart__item">
                                                 <div class="product__cart__item__text">
 
-                                                    <h6><?php echo $pdata['prod_name']; ?></h6>
+                                                    <h6><?php echo $pdata['prod_name']; ?> </h6>
+                                             
 
                                                 </div>
                                             </td>

@@ -1,6 +1,7 @@
 <?php
 
-$connection = mysqli_connect("localhost","root","","themeforest");
+require './atclass/connection.php'; 
+
 ?>
 <footer class="footer">
 
@@ -49,10 +50,10 @@ while($cdata = mysqli_fetch_array($cq)){
                         <h6>NewLetter</h6>
                         <div class="footer__newslatter">
                             <p>Be the first to know about new arrivals,  sales & promos!</p>
-                            <!-- <form action="#">
+                            <form action="#">
                                 <input type="text" placeholder="Your email">
                                 <button type="submit"><span class="icon_mail_alt"></span></button>
-                            </form> -->
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -60,14 +61,12 @@ while($cdata = mysqli_fetch_array($cq)){
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="footer__copyright__text">
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        <!-- <p>Copyright ©
+                        <p>Copyright ©
                             <script>
                                 document.write(new Date().getFullYear());
-                            </script> -->
+                            </script> 
                             
-                        <!-- </p> -->
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                         </p>
                     </div>
                 </div>
             </div>

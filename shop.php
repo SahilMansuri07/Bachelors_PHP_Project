@@ -13,7 +13,7 @@ session_start();
     <meta name="keywords" content="Male_Fashion, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Essensial | MEDI-CORNER</title>
+    <title>FurniVibe | Shape Your Shape</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
@@ -88,7 +88,8 @@ session_start();
                                                     $cq = mysqli_query($connection, "select * from tbl_category ");
                                                     while ($cdata = mysqli_fetch_array($cq)) {
 
-                                                        echo "<li><a href='shop.php?categoryid={$cdata['category_id']}'> {$cdata['category_name']} </li>";
+                                                        echo "<li><a href='shop.php?categoryid={$cdata['category_id']}'>{$cdata['category_name']}</a></li>";
+
 
                                                     }
                                                     ?>
@@ -229,8 +230,11 @@ session_start();
                         }
 
                                                 ">
-                            <div class="pagination__option">
-                                <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+
+                                                <div class="pagination__option">
+                                                    <?php 
+                                       
+                                                    for ($i = 1; $i <= $total_pages; $i++): ?>
                                     <a href="shop.php?page=<?php echo $i; ?><?php
                                        if (isset($_GET['categoryid']))
                                            echo '&categoryid=' . $_GET['categoryid'];

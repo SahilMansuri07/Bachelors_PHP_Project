@@ -54,7 +54,7 @@ if ($_POST) {
     <meta name="keywords" content="Male_Fashion, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Male-Fashion | Template</title>
+    <title>FurniVibe | Shape Your Space</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
@@ -108,7 +108,7 @@ if ($_POST) {
     <section class="checkout spad">
         <div class="container">
             <div class="checkout__form">
-                <form method="post">
+                <form method="post" onsubmit="Validation();">
                     <div class="row">
                         <div class="col-lg-7 col-md-6">
                             <h6 class="checkout__title">Billing Details</h6>
@@ -116,27 +116,33 @@ if ($_POST) {
                                 <div class="col-lg-12">
                                     <div class="checkout__input">
                                         <p> Name </p>
-                                        <input type="text" name="fname" placeholder=" Enter Name">
+                                        <input type="text" name="fname" id="fname" placeholder=" Enter Name"
+                                            onkeyup="Validation();">
+                                        <span id="nameerr" style="color: red;"></span>
                                     </div>
                                 </div>
 
                             </div>
                             <div class="checkout__input">
-                                Address<input type="text" name="address" placeholder="Enter Address"
-                                    class="checkout__input__add">
+                                Address<input type="text" name="address" id="address" placeholder="Enter Address"
+                                    class="checkout__input__add" onkeyup="Validation();">
+                                <span id="adderr" style="color: red;"></span>
                                 <!-- <textarea name="address" name="address"  placeholder=" Address"  class="checkout__input__add"></textarea> -->
                             </div>
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="checkout__input">
                                         <p>Phone</p>
-                                        <input type="text" name="mphone" placeholder=" Enter phone no ">
+                                        <input type="text" name="mphone" id="phone" placeholder=" Enter phone no "
+                                            onkeyup="Validation();">
+                                        <span id="phoneerr" style="color: red;"></span>
                                     </div>
                                 </div>
 
                             </div>
                             <h6 class="checkout__title">Payment Mode</h6>
                             <input type="radio" id="pcash" value="Cash" checked name="paymentoption" />
+
                             <b>Cash</b>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <input type="radio" id="pupi" value="UPI" name="paymentoption" /> <b>UPI</b>
@@ -152,6 +158,7 @@ if ($_POST) {
 
                                 <p><b>Either Scan Image or Enter UPI No</b></p>
                             </div>
+                            <span style="color: red;"></span>
                             <div class="form-group" id="upitxt">
                                 <input type="radio" name="upi_method" value="GPay" onchange="return enter_upi_id()">
                                 <img src="https://t3.ftcdn.net/jpg/06/16/18/18/360_F_616181843_l404nbV07vMiXDZ1IhWiqZRDpetpuigu.jpg"
@@ -164,14 +171,17 @@ if ($_POST) {
 
                                 <label for="">Name<span>*</span></label>
                                 <input class="form-control" type="varchar" name="txt1" placeholder="Name">
+                                <span style="color: red;"></span>
                             </div>
                             <div class="form-group" id="txt2">
                                 <label for="">Card No<span>*</span></label>
                                 <input class="form-control" type="number" name="txt2" placeholder="4134 - 1024 - 3640">
+                                <span style="color: red;"></span>
                             </div>
                             <div class="form-group" id="txt3">
                                 <label for="">CVV<span>*</span></label>
                                 <input class="form-control" type="number" name="txt3" placeholder="Card No">
+                                <span style="color: red;"></span>
                             </div>
                             <hr>
 
@@ -324,4 +334,37 @@ if ($_POST) {
 
 <script>
     $("#pay_now").click();
+</script>
+
+<!-- adding validaitons -->
+<script>
+    function Validation(e) {
+        var name = document.getElementById("fname").value;
+        var address = document.getElementById("address").value;
+        var phone = document.getElementById("phone").value;
+        var Regname = /[^a-zA-Z]/;
+        var Regphone = /^[0-9]{10}$/;
+
+        if (name == "") {
+            event.preventDefault();
+            document.getElementById("nameerr").innerHTML = "Name is require";
+        }
+        else if (Regname.test(name)) {
+            event.preventDefault();
+            document.getElementById("nameerr").innerHTML = "NAME MUST BE IN CHARECTER";
+        }
+        else if (address == "") {
+            event.preventDefault();
+            document.getElementById("adderr").innerHTML = "address is require";
+
+        } else if (phone == "") {
+            event.preventDefault();
+            document.getElementById("phoneerr").innerHTML = "phone is require";
+        } else if (Regphone.test(phone)) {
+            event.preventDefault();
+            document.getElementById("phoneerr").innerHTML = "NUmber MUST BE IN 10 lengh ";
+        }
+
+
+    }
 </script>

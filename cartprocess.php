@@ -7,7 +7,7 @@ $uid = $_SESSION['uid'];
 
 //  login chek
 if(!isset($_SESSION['uid']))   
-{
+{ 
 
     header("location:login.php");
 }
